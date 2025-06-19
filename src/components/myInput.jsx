@@ -6,9 +6,9 @@ function Input () {
 
 
     return(
-        <div class="my_input" >
-            <label for="first-name">FIRST NAME</label>
-            <input type="text" id="first-name" name="first-name" required minlength="2" />
+        <div className="my_input" >
+            <label htmlFor="first-name">FIRST NAME</label>
+            <input type="text" id="first-name" name="first-name" required minLength="2" />
         </div>
     )
 

@@ -3,3 +3,7 @@ notes.txt
 #### 
 https://stackoverflow.com/questions/67201406/pass-down-label-element-as-a-prop-in-react
 ####
+
+
+<MyButton  label= 'Edit'  id = {setID(id +1)}/>
+<MyButton  label= 'Submit' id= {setID(id +1)}/>

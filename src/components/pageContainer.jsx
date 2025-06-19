@@ -6,7 +6,7 @@ function Page_Container () {
 
 
     return (
-        <div class='page_container'>
+        <div className='page_container'>
             Page Container
             <Comp_Container />
             <Comp_Container />

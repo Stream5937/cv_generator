@@ -1,18 +1,27 @@
 import { useState } from 'react';
 import '../styles/my_button.css';
-
-function MyButton (label='btn', id=0) {
-
+/*
+function MyButton ({label}) {
 
     return (
         <button 
             type='button'
             label={label}
-            id= {id}
             >
-           btn
+           {label}
         </button>
     )
 }
+
+export default MyButton;
+*/
+
+const MyButton = ({ children, onClick }) => {
+  return (
+    <button onClick={onClick}>
+      {children}
+    </button>
+  );
+};
 
 export default MyButton;

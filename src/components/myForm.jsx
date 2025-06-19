@@ -6,7 +6,7 @@ function MyForm () {
 
 
     return (
-        <div class='my_form'>
+        <div className='my_form'>
             Form
             <Input />
             <Input />
