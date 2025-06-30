@@ -5,3 +5,27 @@
     background-color: aliceblue;
     margin: 5px;
 }
+
+.form-header-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-header-title > p{
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.form-header-img{
+    width: 24px;
+    height: auto;
+    margin: 0 12px;
+}
+
+.expand-icon{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    margin: 0 2rem;
+}

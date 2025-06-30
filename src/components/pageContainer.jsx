@@ -1,5 +1,8 @@
-import { useState } from 'react'
-import  Comp_Container from './componentContainer.jsx'
+//import { useState } from 'react'
+import { Comp_Container_gen,
+         Comp_Container_edu,
+         Comp_Container_exp
+} from './componentContainer.jsx'
 import '../styles/page_container.css'
 
 function Page_Container () {
@@ -7,10 +10,10 @@ function Page_Container () {
 
     return (
         <div className='page_container'>
-            Page Container
-            <Comp_Container />
-            <Comp_Container />
-            <Comp_Container />  
+            <h2>Data Input</h2>
+            <Comp_Container_gen />
+            <Comp_Container_edu />
+            <Comp_Container_exp />  
         </div>
     )
 }

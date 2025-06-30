@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import Page_Container from './components/pageContainer.jsx'
+import DisplayCV from './components/displayData.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
   const [clearData, setClearData] = useState(false);
 
   return (
@@ -20,7 +21,8 @@ function App() {
           </button>
         </div>
         <div className='display'>
-          
+          <h2>C V </h2>
+          <DisplayCV />
         </div>
       </div>
     </div>
