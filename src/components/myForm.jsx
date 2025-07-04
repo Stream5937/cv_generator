@@ -1,54 +1,98 @@
-import { useState } from 'react'
-import  Input  from './myInput.jsx'
-import {CV_gen, CV_edu, CV_exp} from '../data/data.js'
+import { useState, useEffect } from 'react';
+//import  Input  from './myInput.jsx'
+//import {CV_gen, CV_edu, CV_exp} from '../data/data.js'
 import personal from '../assets/personal.png'
 import expandMore from '../assets/expand-more.png';
 import expandLess from '../assets/expand-less.png';
+//import  MyButton  from './myButton.jsx'
+//import EditGen from './EditGenModal/EditGenModalCall.jsx'
 import '../styles/my_form.css';
 
-//function MyForm_gen () {
-const MyForm_gen = () => {
-    const [cv_gen, setCV_gen] = useState(CV_gen[0]);
-    const[name, setName] = useState(CV_gen[0].name);
-    const [email, setEmail] = useState(CV_gen[0].email);
-    const [tel, setTel] = useState(CV_gen[0].tel);
+const MyForm_gen = (props) => {
 
-    const toggleForm = () => {
-        setIsShown(!isShown);
-    };
+console.log('props: ',props);
+
+    const [form, setForm] = useState('form_gen');
+    const[name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
     const [isShown, setIsShown] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
-    console.log('data gen: ', CV_gen);
-    console.log('data edu: ', CV_edu);
-    console.log('data exp: ', CV_exp);
+    const  toggleForm =() => {
+        setIsShown(!isShown);
+        //toggleEdit();
+    };
+    
+    const toggleEdit = () => {
+       // setIsEdit(!isEdit);
+    };
 
-    const handleNameChange= (e) => {
-   setName(e.target.value);
-    const newCV_gen = { 
-      ...cv_gen, 
-      name: {name}
-    }
-    setCV_gen(newCV_gen);    
+//NB not using useEffect which should not be called conditionally
+
+   // if(props.isEditing){
+       //toggleForm();
+      //setIsEdit(!isEdit);
+      /*
+        setName(name);
+        setEmail(email);
+        setMobile(mobile);
+        setIsShown(true);
+        */
+       //setIsShown(!isShown);
+   // }
+
+    const isFormValid = () => {
+    return name.length && email.length && mobile.length;
+  };
+    
+  
+const handleNameChange= (e) => {
+      e.preventDefault();
+      setName(e.target.value);  
   };
 
   const handleEmailChange= (e) => {
-   setEmail(e.target.value);
-    const newCV_gen = { 
-      ...cv_gen, 
-      email: {email}
-    }
-    setCV_gen(newCV_gen);    
+    e.preventDefault();
+    setEmail(e.target.value);    
   };
 
-  const handleTelChange= (e) => {
-   setTel(e.target.value);
-    const newCV_gen = { 
-      ...cv_gen, 
-      tel: {tel}
-    }
-    setCV_gen(newCV_gen);    
+  const handleMobileChange= (e) => {
+    e.preventDefault();
+    setMobile(e.target.value);    
   };
 
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    const formData = {
+      name: name,
+      email: email,
+      mobile: mobile,
+      form: form,
+      isShown: isShown,
+    };
+    props.saveInputValue(formData);
+     /*
+    setForm(form);
+    
+    setName('');
+    setEmail('');
+    setMobile('');
+    
+    setName(name);
+    setEmail(email);
+    setMobile(mobile);
+    */
+    setIsShown(false);
+    /**/
+    /*
+    const handleClick_edit_gen = () => {
+        console.log('Edit general info Button was clicked');
+       //open edit modal
+       
+    };
+*/
+  };
 
     return (
         <div className='my_form_general'>
@@ -62,25 +106,70 @@ const MyForm_gen = () => {
           className="expand-icon"
           />
           </div>
-          </div>
-          {isShown && (
+        </div>
+          {(isShown || props.isEditing) && (
+          <form onSubmit={onSubmitForm}>
             <div>
-            <Input  label='Full Name'
-                    value= {name} required minLength="2"
-                    onChange= {handleNameChange}/>
-            <Input  label='Email'
-                    value= {email}
-                    onChange= {handleEmailChange}/>
-            <Input  label='Tel. number'
-                    value= {tel}
-                    onChange= {handleTelChange}/>
+                <div className="input-container">
+                <label htmlFor="fullName">Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Enter your full name"
+                  id="fullName"
+                  value= {name} required minLength="2"
+                  onChange={handleNameChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="mobile">Mobile Phone Number</label>
+                <input
+                  type="text"
+                  name="mobile"
+                  placeholder="mobile no."
+                  id="mobile"
+                  value={mobile}
+                  onChange={handleMobileChange}
+                />
+              </div>
             </div>
+            <div className="form-buttons">
+            <span></span>
+            <button className="save-form" type="submit" disabled={!isFormValid()}>
+              <span>
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="svg-right"
+                >
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                </svg>{' '}
+                <span></span>
+                Save
+              </span>
+            </button>
+          </div>
+            </form>
             )}
         </div>
     )
 }
 
-
+/*
 const MyForm_edu = () => {
 
     const [cv_edu, setCV_edu] = useState(CV_edu[0]);
@@ -102,7 +191,7 @@ const MyForm_edu = () => {
     setCV_edu(newCV_edu);    
   };
 
-  console.log('data: ', CV_edu);
+  //console.log('data: ', CV_edu);
 
   const handleStudyTitleChange= (e) => {
    setStudyTitle(e.target.value);
@@ -154,13 +243,6 @@ const MyForm_edu = () => {
     )
 }
 
-/*
-  companyName: 'John Doe\'s Company',
-  positionTitle: 'Astrophysicist',
-  responsibilities: 'Making the tea',
-  startDate: '01/02/2023',
-  endDate:   '01/03/2024'
-*/
 
 function MyForm_exp () {
 
@@ -176,9 +258,7 @@ function MyForm_exp () {
     };
     const [isShown, setIsShown] = useState(false);
 
-    console.log('data gen: ', CV_gen);
-    console.log('data edu: ', CV_edu);
-    console.log('data exp: ', CV_exp);
+    
 
     const handleCompanyChange= (e) => {
     setCompany(e.target.value);
@@ -303,4 +383,26 @@ function MyForm (suffix){
 */
 
 //export default MyForm
-export {MyForm_gen, MyForm_edu, MyForm_exp}
+//export {MyForm_gen, MyForm_edu, MyForm_exp}
+export {MyForm_gen}
+//export default MyForm_gen;
+
+
+
+/*
+const onSubmitForm = (e) => {
+    e.preventDefault();
+    const formData = {
+      name: name,
+      email: email,
+      mobile: mobile,
+      form: form,
+      isShown: isShown,
+    };
+    props.saveInputValue(formData);
+    setName('');
+    setEmail('');
+    setMobile('');
+    setIsShown(false);
+  };
+*/

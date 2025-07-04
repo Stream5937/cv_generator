@@ -17,6 +17,7 @@ export default MyButton;
 */
 
 const MyButton = ({ children, onClick }) => {
+  console.log('btn children: ',children);
   return (
     <button onClick={onClick}>
       {children}

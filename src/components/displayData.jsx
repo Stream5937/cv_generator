@@ -1,21 +1,22 @@
 import '../styles/display_container.css'
-import '../styles/comp_container.css'
+import '../styles/form.css'
 import {CV_gen , CV_edu , CV_exp} from '../data/data.js'
+import RenderField from './RenderField.jsx'
 
 
 
-function DisplayCV () {
-
-    const gen = () => {
+function DisplayCV (props) {
+  console.log('props: ',props);
+    
         return (
             <div className='comp_container'>
-            <span id='1'>Name : {CV_gen[0].name }</span><br/>
-            <span id='2'>Email : {CV_gen[0].email }</span><br/>
-            <span id='3'>Tel. number : {CV_gen[0].tel }</span><br/>
+                <RenderField props={props} />
             </div>
         )
-    };
+            
 
+}
+/*
 const edu = () => {
         return (
             <div className='comp_container'>
@@ -37,16 +38,34 @@ const exp = () => {
             </div>
         )
     }
+*/
 
+/*
     return (
         <div className='display_container'>
             <div className='display_general'>{gen()}</div>
-            <div className='display_education'>{edu()}</div>
-            <div className='display_experience'>{exp()}</div>
+            
         </div>
 
     )
 
 }
+    */
 
 export default DisplayCV
+
+
+/*
+const gen = () => {
+        return (
+            <div className='comp_container'>
+            <span id='1'>Name : {CV_gen[0].name }</span><br/>
+            <span id='2'>Email : {CV_gen[0].email }</span><br/>
+            <span id='3'>Tel. number : {CV_gen[0].tel }</span><br/>
+            </div>
+        )
+    };
+
+
+    
+        */

@@ -12,17 +12,12 @@ function App() {
     <>
     
     <div className='outer_container'>
-      <h1>C V Generator</h1>
       <div className='container'>
         <Page_Container />
         <div className="card">
           <button onClick={() => setClearData((clearData) => alert('confirm clear all input data'))}>
             Clear all
           </button>
-        </div>
-        <div className='display'>
-          <h2>C V </h2>
-          <DisplayCV />
         </div>
       </div>
     </div>

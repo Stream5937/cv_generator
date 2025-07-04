@@ -1,24 +1,24 @@
  const CV_gen = [{
   id: 0,
-  name: 'John Doe',
-  email: 'jdoe@jdoe.com',
-  tel: '01234567890'
+  name: 'Enter your name',
+  email: 'e.g. jdoe@jdoe.com',
+  mobile: 'add your mobile number'
 }]
 
  const CV_edu = [{
   id: 0,
-  schoolName: 'John Doe\'s school',
-  studyTitle: 'Astrophysics',
-  studyDate: '01/02/2023'
+  schoolName: 'Enter name of school',
+  studyTitle: 'Subject of study',
+  studyDate: 'format dd/mm/yyyy'
 }]
 
  const CV_exp = [{
   id: 0,
-  companyName: 'John Doe\'s Company',
-  positionTitle: 'Astrophysicist',
-  responsibilities: 'Making the tea',
-  startDate: '01/02/2023',
-  endDate:   '01/03/2024'
+  companyName: 'Enter name of company',
+  positionTitle: 'eg Astrophysicist',
+  responsibilities: 'eg Making the tea',
+  startDate: 'format dd/mm/yyyy',
+  endDate:   'format dd/mm/yyyy'
 }]
 
 export {CV_gen, CV_edu, CV_exp}
