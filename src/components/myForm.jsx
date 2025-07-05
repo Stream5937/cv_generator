@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
-//import  Input  from './myInput.jsx'
-//import {CV_gen, CV_edu, CV_exp} from '../data/data.js'
 import personal from '../assets/personal.png'
 import expandMore from '../assets/expand-more.png';
 import expandLess from '../assets/expand-less.png';
-//import  MyButton  from './myButton.jsx'
-//import EditGen from './EditGenModal/EditGenModalCall.jsx'
 import '../styles/my_form.css';
 
 const MyForm_gen = (props) => {
@@ -17,37 +13,17 @@ console.log('props: ',props);
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [isShown, setIsShown] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
+   // const [isEdit, setIsEdit] = useState(false);
 
     const  toggleForm =() => {
         setIsShown(!isShown);
-        //toggleEdit();
     };
-    
-    const toggleEdit = () => {
-       // setIsEdit(!isEdit);
-    };
-
-//NB not using useEffect which should not be called conditionally
-
-   // if(props.isEditing){
-       //toggleForm();
-      //setIsEdit(!isEdit);
-      /*
-        setName(name);
-        setEmail(email);
-        setMobile(mobile);
-        setIsShown(true);
-        */
-       //setIsShown(!isShown);
-   // }
 
     const isFormValid = () => {
     return name.length && email.length && mobile.length;
   };
     
-  
-const handleNameChange= (e) => {
+  const handleNameChange= (e) => {
       e.preventDefault();
       setName(e.target.value);  
   };
@@ -72,26 +48,7 @@ const handleNameChange= (e) => {
       isShown: isShown,
     };
     props.saveInputValue(formData);
-     /*
-    setForm(form);
-    
-    setName('');
-    setEmail('');
-    setMobile('');
-    
-    setName(name);
-    setEmail(email);
-    setMobile(mobile);
-    */
     setIsShown(false);
-    /**/
-    /*
-    const handleClick_edit_gen = () => {
-        console.log('Edit general info Button was clicked');
-       //open edit modal
-       
-    };
-*/
   };
 
     return (
@@ -169,46 +126,51 @@ const handleNameChange= (e) => {
     )
 }
 
-/*
-const MyForm_edu = () => {
 
-    const [cv_edu, setCV_edu] = useState(CV_edu[0]);
-    const[schoolName, setSchoolName] = useState(CV_edu[0].schoolName);
-    const [studyTitle, setStudyTitle] = useState(CV_edu[0].studyTitle);
-    const [studyDate, setStudyDate] = useState(CV_edu[0].studyDate);
+const MyForm_edu = (props) => {
+    console.log('props: ',props);
+
+    const [form, setForm] = useState('form_edu');
+    const[schoolName, setSchoolName] = useState('');
+    const [studyTitle, setStudyTitle] = useState('');
+    const [studyDate, setStudyDate] = useState('');
+    const [isShown, setIsShown] = useState(false);
 
     const toggleForm = () => {
         setIsShown(!isShown);
     };
-    const [isShown, setIsShown] = useState(false);
-
-    const handleSchoolNameChange= (e) => {
-   setSchoolName(e.target.value);
-    const newCV_edu = { 
-      ...cv_edu, 
-      schoolName: {schoolName}
-    }
-    setCV_edu(newCV_edu);    
+    
+    const isFormValid = () => {
+    return schoolName.length && studyTitle.length && studyDate.length;
   };
 
-  //console.log('data: ', CV_edu);
+  const handleSchoolNameChange= (e) => {
+      e.preventDefault();
+      setSchoolName(e.target.value);   
+  };
 
   const handleStudyTitleChange= (e) => {
-   setStudyTitle(e.target.value);
-    const newCV_edu = { 
-      ...cv_edu, 
-      studyTitle: {studyTitle}
-    }
-    setCV_edu(newCV_edu);    
+    e.preventDefault();
+    setStudyTitle(e.target.value);   
   };
 
   const handleStudyDateChange= (e) => {
-   setStudyDate(e.target.value);
-    const newCV_edu = { 
-      ...cv_edu, 
-      studyDate: {studyDate}
-    }
-    setCV_edu(newCV_edu);    
+    e.preventDefault();
+    setStudyDate(e.target.value);   
+  };
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    const formData = {
+      name: schoolName,
+      email: studyTitle,
+      mobile: studyDate,
+      form: form,
+      isShown: isShown,
+    };
+    //props obj is saveInputValue: saveInputValuEdu
+    props.saveInputValue(formData);
+    setIsShown(false);
   };
 
 
@@ -225,18 +187,63 @@ const MyForm_edu = () => {
           />
           </div>
           </div>
-          {isShown && (
+          {(isShown || props.isEditing) && (
+            <form onSubmit={onSubmitForm}>
             <div>
-            <Input  label='School Name'
-                    value= {schoolName} required minLength="2"
-                    onChange= {handleSchoolNameChange}/>
-            <Input  label='Study Title'
-                    value= {studyTitle}
-                    onChange= {handleStudyTitleChange}/>
-            <Input  label='Study Date'
-                    value= {studyDate}
-                    onChange= {handleStudyDateChange}/>
-                </div>
+                <div className="input-container">
+                <label htmlFor="schoolName">School Name</label>
+                <input
+                  type="text"
+                  name="schoolName"
+                  placeholder="Enter your school / colleg name"
+                  id="schoolName"
+                  value= {schoolName} required minLength="2"
+                  onChange={handleSchoolNameChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="studyTitle">Study Title</label>
+                <input
+                  type="text"
+                  name="studyTitle"
+                  placeholder="Stuy Title"
+                  id="studyTitle"
+                  value={studyTitle}
+                  onChange={handleStudyTitleChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="studyDate">Study </label>Date
+                <input
+                  type="text"
+                  name="studyDate"
+                  placeholder="Date of study"
+                  id="studyDate"
+                  value={studyDate}
+                  onChange={handleStudyDateChange}
+                />
+              </div>
+            </div>
+            <div className="form-buttons">
+            <span></span>
+            <button className="save-form" type="submit" disabled={!isFormValid()}>
+              <span>
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="svg-right"
+                >
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                </svg>{' '}
+                <span></span>
+                Save
+              </span>
+            </button>
+          </div>
+            </form>
             )}
         </div>
         
@@ -244,65 +251,50 @@ const MyForm_edu = () => {
 }
 
 
-function MyForm_exp () {
+const MyForm_exp = (props) => {
+    console.log('props: ',props);
 
-    const [cv_exp, setCV_exp] = useState(CV_exp[0]);
-    const[company, setCompany] = useState(CV_exp[0].companyName);
-    const[position, setPosition] = useState(CV_exp[0].positionTitle);
-    const [responsibilities, setResponsibilities] = useState(CV_exp[0].responsibilities);
-    const [startDate, setStartDate] = useState(CV_exp[0].startDate);
-    const [endDate, setEndDate] = useState(CV_exp[0].endDate);
+    const [form, setForm] = useState('form_exp');
+    const[company, setCompany] = useState('');
+    const [position, setPosition] = useState('');
+    const [responsibilities, setResponsibilities] = useState('');
+    const [isShown, setIsShown] = useState(false);
 
     const toggleForm = () => {
         setIsShown(!isShown);
     };
-    const [isShown, setIsShown] = useState(false);
-
     
-
-    const handleCompanyChange= (e) => {
-    setCompany(e.target.value);
-    const newCV_exp = { 
-      ...cv_exp, 
-      company: {company}
-    }
-    setCV_exp(newCV_exp);    
+    const isFormValid = () => {
+    return company.length && position.length && responsibilities.length;
   };
 
-    const handlePositionChange= (e) => {
-    setPosition(e.target.value);
-    const newCV_exp = { 
-      ...cv_exp, 
-      position: {position}
-    }
-    setCV_exp(newCV_exp);    
+  const handleCompanyChange= (e) => {
+      e.preventDefault();
+      setCompany(e.target.value);   
+  };
+
+  const handlePositionChange= (e) => {
+    e.preventDefault();
+    setPosition(e.target.value);   
   };
 
   const handleResponsibilitiesChange= (e) => {
-   setResponsibilities(e.target.value);
-    const newCV_exp = { 
-      ...cv_exp, 
-      responsibilities: {responsibilities}
-    }
-    setCV_exp(newCV_exp);    
+    e.preventDefault();
+    setResponsibilities(e.target.value);   
   };
 
-  const handleStartChange= (e) => {
-   setStartDate(e.target.value);
-    const newCV_exp = { 
-      ...cv_exp, 
-      startDate: {startDate}
-    }
-    setCV_exp(newCV_exp);    
-  };
-
-  const handleEndChange= (e) => {
-   setEndDate(e.target.value);
-    const newCV_exp = { 
-      ...cv_exp, 
-      endDate: {endDate}
-    }
-    setCV_exp(newCV_exp);    
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    const formData = {
+      company: company,
+      position: position,
+      responsibilities: responsibilities,
+      form: form,
+      isShown: isShown,
+    };
+    //props obj is saveInputValue: saveInputValuExp
+    props.saveInputValue(formData);
+    setIsShown(false);
   };
 
 
@@ -319,90 +311,71 @@ function MyForm_exp () {
           />
           </div>
           </div>
-          
-          {isShown && (
+          {(isShown || props.isEditing) && (
+            <form onSubmit={onSubmitForm}>
             <div>
-            <Input  label='Company'
-                    value= {company} required minLength="2"
-                    onChange= {handleCompanyChange}/>
-            <Input  label='Position Title'
-                    value= {position} required minLength="2"
-                    onChange= {handlePositionChange}/>
-            <Input  label='Responsibilities'
-                    value= {responsibilities}
-                    onChange= {handleResponsibilitiesChange}/>
-            <Input  label='From'
-                    value= {startDate}
-                    onChange= {handleStartChange}/>
-            <Input  label='To'
-                    value= {endDate}
-                    onChange= {handleEndChange}/>
-             </div>
+                <div className="input-container">
+                <label htmlFor="company">Company Name</label>
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Enter your company name"
+                  id="company"
+                  value= {company} required minLength="2"
+                  onChange={handleCompanyChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="position">Position Title</label>
+                <input
+                  type="text"
+                  name="position"
+                  placeholder="Position Title"
+                  id="position"
+                  value={position}
+                  onChange={handlePositionChange}
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="responsibilities">Responsibilities</label>
+                <input
+                  type="text"
+                  name="responsibilities"
+                  placeholder="Responsibilities"
+                  id="responsibilities"
+                  value={responsibilities}
+                  onChange={handleResponsibilitiesChange}
+                />
+              </div>
+            </div>
+            <div className="form-buttons">
+            <span></span>
+            <button className="save-form" type="submit" disabled={!isFormValid()}>
+              <span>
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="svg-right"
+                >
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                </svg>{' '}
+                <span></span>
+                Save
+              </span>
+            </button>
+          </div>
+            </form>
             )}
         </div>
         
     )
 }
 
-//NB NOT ALLOWED HOOK RULES DO NOT USE HOOKS INSIDE LOOPS OR CONDITIONAL STATEMENTS
-
-//SO EACH CALL HAS TO BE UNIQUE 
-/*
-//match suffix to function call
-const form = {
-  'general' : MyForm_gen(),
-  'education': MyForm_edu(),
-  'experience': MyForm_exp()
-}
 
 
-function MyForm (suffix){
-  switch ( suffix) {
-    case 'general': {
-      return (
-          form.general
-      )
-    }
-    case 'education': {
-      return (
-          form.education
-      )
-    }
-    case 'experience': {
-      return (
-          form.experience
-      )
-    }
-    default: {
-        return (
-          console.log ('Error calling MyForm : unknown suffix')
-        )
-      }
-  }//switch
-}  
-*/
 
-//export default MyForm
 //export {MyForm_gen, MyForm_edu, MyForm_exp}
-export {MyForm_gen}
-//export default MyForm_gen;
-
-
-
-/*
-const onSubmitForm = (e) => {
-    e.preventDefault();
-    const formData = {
-      name: name,
-      email: email,
-      mobile: mobile,
-      form: form,
-      isShown: isShown,
-    };
-    props.saveInputValue(formData);
-    setName('');
-    setEmail('');
-    setMobile('');
-    setIsShown(false);
-  };
-*/
+export {MyForm_gen, MyForm_edu, MyForm_exp}

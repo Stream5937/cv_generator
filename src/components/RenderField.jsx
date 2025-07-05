@@ -2,7 +2,6 @@ import React from 'react';
 
 const RenderField = ({ props }) => {
 
-  //console.log('props@renfield: ',props);
   return (
     <>
       {Object.entries(props).map(([key, value]) => {
