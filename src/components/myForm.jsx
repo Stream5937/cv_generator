@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react'
 import personal from '../assets/personal.png'
+import school from '../assets/school.png'
+import work from '../assets/work-history.png'
 import expandMore from '../assets/expand-more.png';
 import expandLess from '../assets/expand-less.png';
+//import {form_gen, form_edu, form_exp} from './formContainer.jsx';
+
 import '../styles/my_form.css';
 
 const MyForm_gen = (props) => {
@@ -90,7 +94,7 @@ console.log('props: ',props);
                 />
               </div>
               <div className="input-container">
-                <label htmlFor="mobile">Mobile Phone Number</label>
+                <label htmlFor="mobile">Mobile Number</label>
                 <input
                   type="text"
                   name="mobile"
@@ -105,17 +109,6 @@ console.log('props: ',props);
             <span></span>
             <button className="save-form" type="submit" disabled={!isFormValid()}>
               <span>
-                {' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="svg-right"
-                >
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
-                </svg>{' '}
-                <span></span>
                 Save
               </span>
             </button>
@@ -178,7 +171,7 @@ const MyForm_edu = (props) => {
         <div className='my_form_education'>
           <div className="form-header">
           <div className="form-header-title">
-          <img className="form-header-img" src={personal} />
+          <img className="form-header-img" src={school} />
           <p>Education Information</p>
           <img
           onClick={toggleForm}
@@ -228,17 +221,6 @@ const MyForm_edu = (props) => {
             <span></span>
             <button className="save-form" type="submit" disabled={!isFormValid()}>
               <span>
-                {' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="svg-right"
-                >
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
-                </svg>{' '}
-                <span></span>
                 Save
               </span>
             </button>
@@ -302,7 +284,7 @@ const MyForm_exp = (props) => {
         <div className='my_form_experience'>
           <div className="form-header">
           <div className="form-header-title">
-          <img className="form-header-img" src={personal} />
+          <img className="form-header-img" src={work} />
           <p>Experience Information</p>
           <img
           onClick={toggleForm}
@@ -352,17 +334,6 @@ const MyForm_exp = (props) => {
             <span></span>
             <button className="save-form" type="submit" disabled={!isFormValid()}>
               <span>
-                {' '}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="svg-right"
-                >
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
-                </svg>{' '}
-                <span></span>
                 Save
               </span>
             </button>
@@ -374,8 +345,24 @@ const MyForm_exp = (props) => {
     )
 }
 
-
-
-
 //export {MyForm_gen, MyForm_edu, MyForm_exp}
 export {MyForm_gen, MyForm_edu, MyForm_exp}
+
+/*
+<button className="save-form" type="submit" disabled={!isFormValid()}>
+              <span>
+                {' '}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 12"
+                  fill="currentColor"
+                  className="svg-right"
+                >
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                </svg>{' '}
+                <span></span>
+                Save
+              </span>
+            </button>
+*/
