@@ -1,9 +1,15 @@
 {
-  "name": "cvgenerator",
+  "name": "cv_generator",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://Stream5937.github.io/cv_generator",
   "type": "module",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/Stream5937/cv_generator.git"},
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -22,6 +28,7 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
     "prettier": "3.6.2",
     "vite": "^6.3.5"
